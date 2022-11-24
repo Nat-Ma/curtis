@@ -33,7 +33,7 @@ const warningSchema = new mongoose.Schema({
   description: String,
   location: locationSchema,
   type: String,
-  publicId: String,
+  publicImageId: String,
   imageUrl: String,
   userId: String
 }, {timestamps: true})

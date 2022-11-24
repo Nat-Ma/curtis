@@ -1,6 +1,9 @@
 const { urlencoded } = require('express')
 const express = require('express')
 const { Warning, Location, User } = require('./src/models/warning')
+const uploadToCloudinary = require('./src/services/cloudinary')
+const upload = require('./src/middleware/upload');
+
 require('./src/db/mongoose')
 
 const app = express()
@@ -18,15 +21,22 @@ app.get('/', async (req, res) => {
   }
 })
 
-app.post('/add-warning', async (req, res) => {
+app.post('/add-warning', upload.single('image'), async (req, res) => {
   try {
     const user = await User.findById("637e89a5dae3e5065e2d2042")
     const newWarning = new Warning({...req.body.warning, userId: user._id})
     const savedWarning = await newWarning.save()
     const newLocation = new Location(req.body.location)
+    const image = await uploadToCloudinary(req.file.path, 'warnings')
+
     await Warning.updateOne(
       { _id: savedWarning._id },
-      { $set: { location: newLocation }}
+      { $set: {
+          location: newLocation,
+          imageUrl: image.imageUrl,
+          publicImageId: image.publicId,
+        }
+      }
     )
     res.status(200).send('New warning was posted successfully.')
   } catch (err) {
