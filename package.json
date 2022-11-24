@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "compile-webpack": "webpack --watch",
     "compile-server": "nodemon server",
     "dev": "run-p compile-server compile-webpack"
@@ -26,6 +26,7 @@
     "npm-run-all": "^4.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3",
     "sass": "^1.56.1",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.0",
