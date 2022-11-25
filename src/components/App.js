@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import Home from './Home'
 import NewWarning from './NewWarning'
 import {
@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+// import mapboxgl from '!mapbox-gl';
 
 const App = () => {
   return (

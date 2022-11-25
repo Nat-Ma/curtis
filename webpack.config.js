@@ -1,5 +1,6 @@
 const nodeExternals = require("webpack-node-externals")
 const path = require("path")
+const Dotenv = require("dotenv-webpack")
 
 const typicalReact = {
   rules: [
@@ -23,7 +24,11 @@ const clientConfig = {
     filename: "main.js"
   },
   mode: "development",
-  module: typicalReact
+  module: typicalReact,
+  plugins: [
+    new Dotenv({
+    systemvars: true,}),
+  ]
 }
 
 const serverConfig = {
@@ -37,5 +42,6 @@ const serverConfig = {
   mode: "production",
   module: typicalReact
 }
+
 
 module.exports = [clientConfig, serverConfig]
